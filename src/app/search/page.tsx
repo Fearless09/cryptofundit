@@ -2,6 +2,7 @@
 
 import Campaigns from "@/components/Campaigns";
 import { Pagination } from "@/components/Pagination";
+import Sort from "@/components/Sort";
 import useGetCampaign from "@/hooks/useGetCampaign";
 import usePagination from "@/hooks/usePagination";
 import { notFound, useSearchParams } from "next/navigation";
@@ -11,7 +12,7 @@ export default function page() {
   const searchParams = useSearchParams();
   const title = searchParams.get("title");
 
-  const { campaigns, isLoading } = useGetCampaign();
+  const { campaigns, isLoading, sort, sortCampaigns } = useGetCampaign();
 
   const searchedCampaigns = campaigns?.filter((campaign) => {
     if (!title) return false;
@@ -41,16 +42,22 @@ export default function page() {
     <>
       <Campaigns
         title={`Search results for "${title}"`}
-        campaigns={searchedCampaigns?.splice(startIndex, endIndex)}
+        campaigns={searchedCampaigns?.slice(startIndex, endIndex)}
         isLoading={isLoading}
+        length={searchedCampaigns?.length}
       />
-      {!isLoading && showPagination && (
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          itemsPerPage={itemPerPage}
-          onPageChange={handlePageChange}
-        />
+      {!isLoading && (
+        <>
+          <Sort sort={sort} onSort={sortCampaigns} />
+          {showPagination && (
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              itemsPerPage={itemPerPage}
+              onPageChange={handlePageChange}
+            />
+          )}
+        </>
       )}
     </>
   );

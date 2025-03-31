@@ -82,6 +82,6 @@ export default function usePagination(
     goToPreviousPage,
     goToFirstPage,
     goToLastPage,
-    showPagination: totalItems > itemPerPage,
+    showPagination: totalItems-1 > itemPerPage,
   };
 }

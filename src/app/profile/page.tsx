@@ -2,6 +2,7 @@
 
 import Campaigns from "@/components/Campaigns";
 import { Pagination } from "@/components/Pagination";
+import Sort from "@/components/Sort";
 import useGetCampaign from "@/hooks/useGetCampaign";
 import usePagination from "@/hooks/usePagination";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
@@ -9,7 +10,7 @@ import React, { useEffect } from "react";
 import { useAccount } from "wagmi";
 
 export default function ProfilePage() {
-  const { campaigns, isLoading } = useGetCampaign();
+  const { campaigns, isLoading, sort, sortCampaigns } = useGetCampaign();
   const { address, isConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
 
@@ -35,20 +36,26 @@ export default function ProfilePage() {
   } = usePagination(myCampaign?.length);
 
   return (
-    <>
+    <div className="relative">
       <Campaigns
         title="My Campaigns"
-        campaigns={myCampaign?.splice(startIndex, endIndex)}
+        campaigns={myCampaign?.slice(startIndex, endIndex)}
         isLoading={isLoading}
+        length={myCampaign?.length}
       />
-      {!isLoading && showPagination && (
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          itemsPerPage={itemPerPage}
-          onPageChange={handlePageChange}
-        />
+      {!isLoading && (
+        <>
+          <Sort sort={sort} onSort={sortCampaigns} />
+          {showPagination && (
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              itemsPerPage={itemPerPage}
+              onPageChange={handlePageChange}
+            />
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 }

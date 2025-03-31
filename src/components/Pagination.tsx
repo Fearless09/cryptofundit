@@ -127,7 +127,7 @@ const Button: FC<ButtonProps> = ({ className, active, ...props }) => {
   return (
     <button
       className={cn(
-        "transition-300 dark:text-white-dark border-3a3a43 dark:border-3a3a43-dark blurmd hover:bg[#fff] flex size-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium text-white disabled:cursor-not-allowed",
+        "transition-300 dark:text-white-dark border-3a3a43 dark:border-3a3a43-dark hover:bg[#fff] flex size-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium text-white backdrop-blur-md disabled:cursor-not-allowed",
         className,
         {
           "bg-4acd8d text-white-dark border-0": active,

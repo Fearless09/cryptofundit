@@ -14,13 +14,19 @@ type Props = {
   campaigns: ParseCampaignType[];
   isLoading?: boolean;
   title?: string;
+  length?: number;
 };
 
-export default function Campaigns({ campaigns, isLoading, title }: Props) {
+export default function Campaigns({
+  campaigns,
+  isLoading,
+  title,
+  length = 0,
+}: Props) {
   return (
     <div>
       <h1 className="font-epilogue text-xl font-semibold">
-        {title} ({campaigns?.length || 0})
+        {title} ({length})
       </h1>
 
       <div className="mt-5 mb-10 flex flex-wrap gap-[26px]">
@@ -59,16 +65,18 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
 
   return (
     <Link
-      className="hover:shadow-secondary transition-300 bg-1c1c24 dark:bg-1c1c24-dark w-full cursor-pointer rounded-[15px] hover:-translate-y-1 hover:shadow-white/5 sm:w-[288px]"
+      className="hover:shadow-secondary group transition-300 bg-1c1c24 dark:bg-1c1c24-dark w-full cursor-pointer rounded-[15px] hover:-translate-y1 hover:shadow-white/50 sm:w-[288px]"
       href={`/campaign-details?title=${campaign.title}&id=${campaign.cId}`}
     >
-      <img
-        alt={campaign.title}
-        src={campaign.imageUrl}
-        width={500}
-        height={500}
-        className="h-[158px] w-full rounded-t-[15px] object-cover object-center"
-      />
+      <div className="relative h-[160px] w-full overflow-hidden rounded-t-[15px]">
+        <img
+          alt={campaign.title}
+          src={campaign.imageUrl}
+          width={500}
+          height={500}
+          className="transition-300 size-full object-cover object-center group-hover:scale-125"
+        />
+      </div>
 
       {/* Tag and Category */}
       <div className="flex flex-col p-4">

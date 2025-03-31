@@ -14,7 +14,7 @@ import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const { name, title, description, keywords, authors } = {
+const { name, title, description, url, openImg, icon, keywords, authors } = {
   name: "CrowdFundIt",
   title: "CrowdFundIt: Decentralized Crowdfunding on Sepolia",
   description:
@@ -28,6 +28,9 @@ const { name, title, description, keywords, authors } = {
     "Crypto",
   ],
   authors: [{ name: "Ajayi, Toheeb Opeyemi", url: "toheebopeyemi9@gmail.com" }],
+  icon: "/assets/logo.svg",
+  openImg: "/open-img.webp",
+  url: "https://crowdfundit.vercel.app",
 };
 
 export const metadata: Metadata = {
@@ -35,20 +38,24 @@ export const metadata: Metadata = {
   description,
   keywords,
   authors,
+  icons: [
+    { rel: "icon", url: icon },
+    { rel: "apple-touch-icon", url: icon },
+  ],
   openGraph: {
     title,
     description,
-    url: "https://crowdfundit.vercel.app",
+    url,
     siteName: name,
     locale: "en_US",
     type: "website",
+    images: url + openImg,
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    // site: "@cryptofundit", // Replace with your Twitter handle
-    // creator: "@cryptofundit", // Replace with your Twitter handle
+    images: url + openImg,
   },
 };
 
@@ -72,7 +79,7 @@ export default function RootLayout(props: { children: ReactNode }) {
                 <Sidebar />
               </div>
 
-              <div className="mx-auto w-full flex-1 sm:max-w-[1280px] sm:pr-5">
+              <div className="relative mx-auto w-full flex-1 sm:max-w-[1280px] sm:pr-5">
                 <Navbar />
                 {props.children}
               </div>

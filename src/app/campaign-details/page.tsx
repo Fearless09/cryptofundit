@@ -53,14 +53,16 @@ export default function CampaignDetailPage() {
           <div className="mt-10 flex w-full flex-col gap-[30px] md:flex-row">
             {/* Img and Bar */}
             <div className="flex flex-1 flex-col">
-              <img
-                alt={campaign_details.title}
-                src={campaign_details.imageUrl}
-                className="h-[410px] w-full rounded-xl object-cover"
-              />
+              <div className="group h-[410px] overflow-hidden rounded-xl">
+                <img
+                  alt={campaign_details.title}
+                  src={campaign_details.imageUrl}
+                  className="transition-300 size-full object-cover object-center group-hover:scale-110"
+                />
+              </div>
               <div className="bg-3a3a43 dark:bg-3a3a43-dark relative mt-2 h-[5px] w-full rounded-full">
                 <div
-                  className="absolute inset-y-0 left-0 max-w-full rounded-full bg-[#4acd8d]"
+                  className="transition-300 absolute inset-y-0 left-0 max-w-full rounded-full bg-[#4acd8d]"
                   style={{
                     width:
                       calculateBarPercentage(
