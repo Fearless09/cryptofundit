@@ -20,6 +20,10 @@ export function Pagination({
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
     onPageChange(page);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const renderPageButtons = () => {

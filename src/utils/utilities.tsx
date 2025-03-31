@@ -164,3 +164,10 @@ export const getCategory = (title: string) => {
 
   return "other";
 };
+
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
