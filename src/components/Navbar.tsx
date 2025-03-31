@@ -11,12 +11,16 @@ import NavIcon from "./NavIcon";
 import Link from "next/link";
 import { ActionBtn, AvatarBtn, Logout } from "./NavActionBtn";
 import { Theme } from "./Sidebar";
+import useClickOutside from "@/hooks/useClickOutside";
+import useEscapeClose from "@/hooks/useEscapeClose";
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { toggle, handleToggle } = useToggle(false);
   const [search, setSearch] = useState<string>("");
+  const ref = useClickOutside(() => handleToggle(false));
+  useEscapeClose(toggle, () => handleToggle(false));
 
   return (
     <div className="mb-9 flex flex-col-reverse justify-between gap-6 md:flex-row">
@@ -86,6 +90,7 @@ export default function Navbar() {
               "-translate-y-[calc(600px)]": !toggle,
             },
           )}
+          ref={ref}
         >
           <ul className="mb-6">
             {navlinks.map((link, index) => (
