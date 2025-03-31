@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     siteName: name,
     locale: "en_US",
     type: "website",
-    images: url + openImg,
+    images: openImg,
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: url + openImg,
+    images: openImg,
   },
 };
 
