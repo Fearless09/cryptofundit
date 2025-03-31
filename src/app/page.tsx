@@ -33,7 +33,6 @@ function App() {
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
-              itemsPerPage={itemPerPage}
               onPageChange={handlePageChange}
             />
           )}

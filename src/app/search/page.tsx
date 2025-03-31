@@ -53,7 +53,6 @@ export default function page() {
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
-              itemsPerPage={itemPerPage}
               onPageChange={handlePageChange}
             />
           )}

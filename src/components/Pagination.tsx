@@ -8,14 +8,12 @@ interface PaginationProps {
   totalPages: number;
   currentPage: number;
   onPageChange: (page: number) => void;
-  itemsPerPage: number;
 }
 
 export function Pagination({
   totalPages,
   currentPage = 1,
   onPageChange,
-  itemsPerPage,
 }: PaginationProps) {
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
@@ -24,6 +22,7 @@ export function Pagination({
       top: 0,
       behavior: "smooth",
     });
+    console.log("Scroll", page);
   };
 
   const renderPageButtons = () => {
@@ -103,20 +102,26 @@ export function Pagination({
       <div className="flex items-center gap-x-2">
         <Button
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          // disabled={currentPage === 1}
           aria-label="Go to previous page"
+          className={cn({
+            "cursor-not-allowed": currentPage === 1,
+          })}
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="size-4" />
         </Button>
 
         <div className="flex items-center gap-2">{renderPageButtons()}</div>
 
         <Button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          // disabled={currentPage === totalPages}
           aria-label="Go to next page"
+          className={cn({
+            "cursor-not-allowed": currentPage === totalPages,
+          })}
         >
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="size-4" />
         </Button>
       </div>
     </nav>
@@ -131,7 +136,7 @@ const Button: FC<ButtonProps> = ({ className, active, ...props }) => {
   return (
     <button
       className={cn(
-        "transition-300 dark:text-white-dark border-3a3a43 dark:border-3a3a43-dark hover:bg[#fff] flex size-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium text-white backdrop-blur-md disabled:cursor-not-allowed",
+        "transition-300 dark:text-white-dark border-3a3a43 dark:border-3a3a43-dark flex size-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium text-white backdrop-blur-md disabled:cursor-not-allowed",
         className,
         {
           "bg-4acd8d text-white-dark border-0": active,

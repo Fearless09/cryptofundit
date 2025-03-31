@@ -50,7 +50,6 @@ export default function ProfilePage() {
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
-              itemsPerPage={itemPerPage}
               onPageChange={handlePageChange}
             />
           )}
