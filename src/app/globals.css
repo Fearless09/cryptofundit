@@ -51,6 +51,11 @@
   --color-1dc071: #1dc071; /* Success green */
 }
 
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 @utility linear-gradient {
   background: linear-gradient(
     179.14deg,

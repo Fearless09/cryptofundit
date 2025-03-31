@@ -32,6 +32,16 @@ export default function useCreateCampaign() {
     }));
   }
 
+  function resetCampaignDetails() {
+    setCampaignDetails({
+      title: "",
+      description: "",
+      targetAmount: 0,
+      deadline: "",
+      imageUrl: "",
+    });
+  }
+
   async function createCampaignAsync({
     title,
     deadline,
@@ -95,5 +105,6 @@ export default function useCreateCampaign() {
     error,
     campaignDetails,
     handleCampaignChange,
+    resetCampaignDetails,
   };
 }

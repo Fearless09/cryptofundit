@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Pagination } from "./Pagination";
 
 type Props = {
   campaigns: ParseCampaignType[];
@@ -22,7 +23,7 @@ export default function Campaigns({ campaigns, isLoading, title }: Props) {
         {title} ({campaigns?.length || 0})
       </h1>
 
-      <div className="mt-5 flex flex-wrap gap-[26px]">
+      <div className="mt-5 mb-10 flex flex-wrap gap-[26px]">
         {isLoading && (
           <Image
             alt="Loader"
@@ -66,7 +67,7 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
         src={campaign.imageUrl}
         width={500}
         height={500}
-        className="h-[158px] w-full rounded-t-[15px] object-cover"
+        className="h-[158px] w-full rounded-t-[15px] object-cover object-center"
       />
 
       {/* Tag and Category */}

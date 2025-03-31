@@ -13,8 +13,12 @@ import { useAccount } from "wagmi";
 export default function CreateCampaignPage() {
   const { address, isConnected } = useAccount();
   const { toggle: loading, handleToggle: handleLoading } = useToggle(false);
-  const { campaignDetails, handleCampaignChange, createCampaignAsync } =
-    useCreateCampaign();
+  const {
+    campaignDetails,
+    handleCampaignChange,
+    createCampaignAsync,
+    resetCampaignDetails,
+  } = useCreateCampaign();
   const { openConnectModal } = useConnectModal();
   const { refetchCampaigns } = useGetCampaign();
 
@@ -37,6 +41,7 @@ export default function CreateCampaignPage() {
           handleLoading(true);
           await createCampaignAsync(campaignDetails)
             .then(() => {
+              resetCampaignDetails();
               refetchCampaigns();
             })
             .finally(() => {
@@ -72,7 +77,7 @@ export default function CreateCampaignPage() {
         />
 
         {/*  */}
-        <div className="relative flex h-[120px] w-full items-center justify-start rounded-[10px] text-white-dark bg-[#8c6dfd] p-4">
+        <div className="text-white-dark relative flex h-[120px] w-full items-center justify-start rounded-[10px] bg-[#8c6dfd] p-4">
           <Image
             alt="money"
             width={40}

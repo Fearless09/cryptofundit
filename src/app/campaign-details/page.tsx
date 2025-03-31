@@ -14,6 +14,7 @@ import {
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { notFound, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 
 export default function CampaignDetailPage() {
@@ -167,6 +168,10 @@ export default function CampaignDetailPage() {
                     openConnectModal?.();
                     return;
                   }
+                  if (!donation) {
+                    toast.error("Please enter a donation amount.");
+                    return;
+                  }
                   handleDonating(true);
                   await donateAsync({
                     id: campaign_details.cId,
@@ -234,7 +239,7 @@ const CounterBox = ({ title, value }: CounterBoxProps) => {
       </h4>
       <p
         title={title}
-        className="bg-[#eaeaea] dark:bg-28282e-dark text-808191 dark:text-808191-dark w-full truncate rounded-b-[10px] px-3 py-2 text-sm"
+        className="dark:bg-28282e-dark text-808191 dark:text-808191-dark w-full truncate rounded-b-[10px] bg-[#eaeaea] px-3 py-2 text-sm"
       >
         {title}
       </p>
