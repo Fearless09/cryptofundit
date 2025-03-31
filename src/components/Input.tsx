@@ -6,7 +6,7 @@ type InputProps = ComponentProps<"input"> & {
 };
 
 const className =
-  "font-epilogue rounded-[10px] border border-[#3a3a43] bg-transparent p-[15px] text-sm leading-[22px] text-white outline-hidden placeholder:text-[#4b5264] sm:min-w-[300px] sm:px-[25px]";
+  "font-epilogue rounded-[10px] border border-3a3a43 dark:border-3a3a43-dark bg-transparent p-[15px] text-sm leading-[22px] text-white dark:text-white-dark outline-hidden placeholder:text-4b5264 dark:placeholder:text-4b5264-dark sm:min-w-[300px] sm:px-[25px]";
 
 const genericClassName = className;
 
@@ -20,11 +20,7 @@ export const Input: FC<InputProps> = ({
   return (
     <Label label={label} required={required}>
       <input
-        className={cn(
-          "font-epilogue rounded-[10px] border border-[#3a3a43] bg-transparent p-[15px] text-sm leading-[22px] text-white outline-hidden placeholder:text-[#4b5264] sm:min-w-[300px] sm:px-[25px]",
-          genericClassName,
-          className,
-        )}
+        className={cn(genericClassName, className)}
         step={step || 0.1}
         required={required}
         {...props}
@@ -69,7 +65,7 @@ const Label = ({
   return (
     <label className="flex w-full flex-1 flex-col">
       {!!label && (
-        <span className="font-epilogue mb-1.5 ps-2 text-sm leading-[22px] font-medium text-[#808191]">
+        <span className="font-epilogue text-808191 dark:text-808191-dark mb-1.5 ps-2 text-sm leading-[22px] font-medium">
           {label}
           {!!required && " *"}
         </span>

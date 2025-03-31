@@ -10,6 +10,7 @@ import { Providers } from "./providers";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,19 +60,25 @@ export default function RootLayout(props: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers initialState={initialState}>
-          <Toaster />
-          <div className="relative flex min-h-dvh bg-[#131313] p-4 text-white md:p-8">
-            <div className="relative mr-7 hidden sm:flex md:mr-10">
-              <Sidebar />
-            </div>
+        <ThemeProvider
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Providers initialState={initialState}>
+            <Toaster />
+            <div className="bg-131313 dark:bg-131313-dark dark:text-white-dark relative flex min-h-dvh p-4 text-white md:p-8">
+              <div className="relative mr-7 hidden sm:flex md:mr-10">
+                <Sidebar />
+              </div>
 
-            <div className="mx-auto w-full flex-1 sm:max-w-[1280px] sm:pr-5">
-              <Navbar />
-              {props.children}
+              <div className="mx-auto w-full flex-1 sm:max-w-[1280px] sm:pr-5">
+                <Navbar />
+                {props.children}
+              </div>
             </div>
-          </div>
-        </Providers>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

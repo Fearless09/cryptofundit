@@ -25,7 +25,7 @@ const NavIcon: FC<IconProps> = ({
         "flex size-12 cursor-pointer items-center justify-center rounded-[10px]",
         className,
         {
-          "bg-[#2c2f32]": active && !disabled,
+          "bg-2c2f32 dark:bg-2c2f32-dark": active && !disabled,
           "cursor-default": disabled,
           "w-full justify-start px-4": pTag,
         },
@@ -48,7 +48,7 @@ const NavIcon: FC<IconProps> = ({
       {pTag && (
         <p
           className={cn(
-            "font-epilogue ml-5 text-sm font-medium text-[#aeaeae] capitalize",
+            "font-epilogue text-aeaeae dark:text-aeaeae-dark ml-5 text-sm font-medium capitalize",
             {
               "text-[#1dc071]": active && !disabled,
               "text-red-500": name === "logout",

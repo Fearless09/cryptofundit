@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import NavIcon from "./NavIcon";
 import Link from "next/link";
 import { ActionBtn, AvatarBtn, Logout } from "./NavActionBtn";
+import { Theme } from "./Sidebar";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -21,7 +22,7 @@ export default function Navbar() {
     <div className="mb-9 flex flex-col-reverse justify-between gap-6 md:flex-row">
       {/* Search Bar */}
       <form
-        className="flex h-[52px] w-full max-w-[458px] flex-row gap-0.5 rounded-full bg-[#1c1c24] py-2 pr-2 pl-4 lg:flex-1"
+        className="bg-1c1c24 dark:bg-1c1c24-dark dark:shadow-white-dark/5 flex h-[52px] w-full max-w-[458px] flex-row gap-0.5 rounded-full py-2 pr-2 pl-4 shadow-md lg:flex-1"
         onSubmit={(e) => {
           e.preventDefault();
           if (!search) return;
@@ -31,7 +32,7 @@ export default function Navbar() {
         <input
           type="search"
           placeholder="Search for campaigns"
-          className="font-epilogue flex w-full border-hidden bg-transparent text-sm font-normal text-white outline-hidden placeholder:text-[#4b5264]"
+          className="font-epilogue dark:text-white-dark placeholder:text-4b5264 dark:placeholder:text-4b5264-dark flex w-full border-hidden bg-transparent text-sm font-normal text-white outline-hidden"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           required
@@ -80,9 +81,9 @@ export default function Navbar() {
 
         <div
           className={cn(
-            "shadow-secondary absolute inset-x-0 top-[60px] z-10 w-full translate-y-0 rounded-[10px] bg-[#1c1c24] p-4 transition-all duration-500",
+            "shadow-secondary bg-1c1c24 dark:bg-1c1c24-dark absolute inset-x-0 top-[60px] z-10 w-full translate-y-0 rounded-[10px] p-4 transition-all duration-500",
             {
-              "-translate-y-[calc(500px)]": !toggle,
+              "-translate-y-[calc(600px)]": !toggle,
             },
           )}
         >
@@ -102,6 +103,9 @@ export default function Navbar() {
             ))}
             <li>
               <Logout pTag />
+            </li>
+            <li className="mt-6">
+              <Theme pTag />
             </li>
           </ul>
           <ActionBtn />

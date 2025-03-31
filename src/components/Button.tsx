@@ -5,7 +5,7 @@ const Button: FC<ComponentProps<"button">> = ({ className, ...props }) => {
   return (
     <button
       className={cn(
-        "font-epilogue min-h-[52px] cursor-pointer rounded-[10px] px-6 py-2 text-sm/[26px] font-medium text-white",
+        "font-epilogue min-h-[52px] cursor-pointer rounded-[10px] px-6 py-2 text-sm/[26px] font-medium text-white-dark",
         className,
       )}
       {...props}

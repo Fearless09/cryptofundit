@@ -1,12 +1,54 @@
 @import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --font-epilogue: Epilogue, sans-serif;
-  --font-inter: Inter, sans-serif;
+  --color-131313-dark: #131313;
+  --color-131313: #ffffff;
 
-  --shadow-secondary: 10px 10px 20px rgba(2, 2, 2, 0.25);
+  --color-1c1c24-dark: #1c1c24;
+  --color-1c1c24: #f8f9fa;
+
+  --color-1c1c1c-dark: #1c1c1c;
+  --color-1c1c1c: #f1f3f5;
+
+  --color-2c2f32-dark: #2c2f32;
+  --color-2c2f32: #e9ecef;
+
+  --color-3a3a43-dark: #3a3a43;
+  --color-3a3a43: #dee2e6;
+
+  --color-4acd8d: #4acd8d;
+  --color-8c6dfd: #8c6dfd;
+
+  --color-13131a-dark: #13131a;
+  --color-13131a: #ffffff;
+
+  --color-28282e-dark: #28282e;
+  --color-28282e: #f8f9fa;
+
+  /* Text colors (light to dark) */
+  --color-white-dark: #ffffff;
+  --color-white: #1a1a1a;
+
+  --color-808191-dark: #808191;
+  --color-808191: #6c757d;
+
+  --color-818183-dark: #818183;
+  --color-818183: #495057;
+
+  --color-b2b3bd-dark: #b2b3bd;
+  --color-b2b3bd: #343a40;
+
+  --color-aeaeae-dark: #aeaeae;
+  --color-aeaeae: #adb5bd;
+
+  --color-4b5264-dark: #4b5264;
+  --color-4b5264: #495057;
+
+  /* Status colors (keeping same) */
+  --color-1dc071: #1dc071; /* Success green */
 }
 
 @utility linear-gradient {
@@ -47,9 +89,4 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-text-size-adjust: 100%;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    background-color: #f8f8f8;
-    color: #181818;
-  }
-} */
+ */

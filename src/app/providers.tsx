@@ -4,11 +4,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type ReactNode, useState } from "react";
 import { type State, WagmiProvider } from "wagmi";
 import "@rainbow-me/rainbowkit/styles.css";
-import { RainbowKitProvider, midnightTheme } from "@rainbow-me/rainbowkit";
+import {
+  RainbowKitProvider,
+  midnightTheme,
+  lightTheme,
+} from "@rainbow-me/rainbowkit";
 import { ProgressProvider } from "@bprogress/next/app";
 
 import { getConfig, getRainbowConfig } from "@/wagmi";
 import ContextProvider from "@/context/Context";
+import { useTheme } from "next-themes";
 
 export function Providers(props: {
   children: ReactNode;
@@ -17,10 +22,15 @@ export function Providers(props: {
   const [config] = useState(() => getRainbowConfig());
   const [queryClient] = useState(() => new QueryClient());
 
+  const { resolvedTheme } = useTheme();
+
   return (
     <WagmiProvider config={config as any} initialState={props.initialState}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={midnightTheme()} coolMode>
+        <RainbowKitProvider
+          theme={resolvedTheme === "light" ? lightTheme() : midnightTheme()}
+          coolMode
+        >
           <ContextProvider>
             <ProgressProvider
               height="4px"

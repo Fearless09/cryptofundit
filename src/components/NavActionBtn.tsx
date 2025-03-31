@@ -54,7 +54,7 @@ export const AvatarBtn = ({ className }: Props) => {
   return (
     <button
       className={cn(
-        "flex size-[52px] cursor-pointer items-center justify-center rounded-[10px] bg-[#2c2f32]",
+        "bg-2c2f32 dark:bg-2c2f32-dark flex size-[52px] cursor-pointer items-center justify-center rounded-[10px]",
         className,
       )}
       style={{
@@ -67,7 +67,7 @@ export const AvatarBtn = ({ className }: Props) => {
   );
 };
 
-export  function Logout({ pTag = false }: { pTag?: boolean }) {
+export function Logout({ pTag = false }: { pTag?: boolean }) {
   const { isConnected } = useAccount();
   const { disconnect } = useDisconnect();
 

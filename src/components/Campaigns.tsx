@@ -34,7 +34,7 @@ export default function Campaigns({ campaigns, isLoading, title }: Props) {
         )}
 
         {!isLoading && campaigns?.length === 0 && (
-          <p className="font-epilogue text-[14px]/[30px] font-semibold text-[#818183]">
+          <p className="font-epilogue text-818183 dark:text-818183-dark text-[14px]/[30px] font-semibold">
             You have not created any campaigns yet
           </p>
         )}
@@ -58,7 +58,7 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
 
   return (
     <Link
-      className="hover:shadow-secondary transition-300 w-full cursor-pointer rounded-[15px] bg-[#1c1c24] hover:-translate-y-1 hover:shadow-white/5 sm:w-[288px]"
+      className="hover:shadow-secondary transition-300 bg-1c1c24 dark:bg-1c1c24-dark w-full cursor-pointer rounded-[15px] hover:-translate-y-1 hover:shadow-white/5 sm:w-[288px]"
       href={`/campaign-details?title=${campaign.title}&id=${campaign.cId}`}
     >
       <img
@@ -79,7 +79,7 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
             height={24}
             className="size-4 object-contain"
           />
-          <p className="font-epilogue ms-2 text-[12px] font-medium text-[#808191] capitalize">
+          <p className="font-epilogue text-808191 dark:text-808191-dark ms-2 text-[12px] font-medium capitalize">
             {getCategory(campaign.title)}
           </p>
         </div>
@@ -89,7 +89,7 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
           <h3 className="font-epilogue truncate text-base/[26px] font-semibold">
             {campaign.title}
           </h3>
-          <p className="font-epilogue mt-[5px] truncate text-sm/[18px] text-[#808191]">
+          <p className="font-epilogue text-808191 dark:text-808191-dark mt-[5px] truncate text-sm/[18px]">
             {campaign.description}
           </p>
         </div>
@@ -98,19 +98,19 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
         <div className="mt-4 flex flex-wrap justify-between gap-2">
           {/*  */}
           <div className="flex flex-col">
-            <h4 className="font-epilogue text-[14px]/[22px] font-semibold text-[#b2b3bd]">
+            <h4 className="font-epilogue text-b2b3bd dark:text-b2b3bd-dark text-[14px]/[22px] font-semibold">
               {campaign.raisedAmount}
             </h4>
-            <p className="font-epilogue mt-[3px] truncate text-[12px]/[18px] text-[#808191] sm:max-w-[120px]">
+            <p className="font-epilogue text-808191 dark:text-808191-dark mt-[3px] truncate text-[12px]/[18px] sm:max-w-[120px]">
               Raised of {campaign.targetAmount}
             </p>
           </div>
           {/*  */}
           <div className="flex flex-col">
-            <h4 className="font-epilogue text-[14px]/[22px] font-semibold text-[#b2b3bd]">
+            <h4 className="font-epilogue text-b2b3bd dark:text-b2b3bd-dark text-[14px]/[22px] font-semibold">
               {ramainingDays < 0 ? "Expired" : ramainingDays}
             </h4>
-            <p className="font-epilogue mt-[3px] truncate text-[12px]/[18px] text-[#808191] sm:max-w-[120px]">
+            <p className="font-epilogue text-808191 dark:text-808191-dark mt-[3px] truncate text-[12px]/[18px] sm:max-w-[120px]">
               Days Left
             </p>
           </div>
@@ -122,8 +122,11 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
             className="size-[20px]"
             style={{ color: generateColorFromAddress(campaign.owner) }}
           />
-          <p className="font-epilogue flex-1 truncate text-xs text-[#808191]">
-            By <span className="text-[#b2b3bd]">{campaign.owner}</span>
+          <p className="font-epilogue text-808191 dark:text-808191-dark flex-1 truncate text-xs">
+            By{" "}
+            <span className="text-b2b3bd dark:text-b2b3bd-dark">
+              {campaign.owner}
+            </span>
           </p>
         </div>
       </div>

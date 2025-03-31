@@ -16,13 +16,13 @@ export default function CreateCampaignPage() {
   const { campaignDetails, handleCampaignChange, createCampaignAsync } =
     useCreateCampaign();
   const { openConnectModal } = useConnectModal();
-    const { refetchCampaigns } = useGetCampaign();
+  const { refetchCampaigns } = useGetCampaign();
 
   return (
-    <div className="relative flex flex-col items-center justify-center rounded-[10px] bg-[#1c1c1c] p-4 text-white sm:p-10">
+    <div className="bg-1c1c1c dark:bg-1c1c1c-dark dark:text-white-dark relative flex flex-col items-center justify-center rounded-[10px] p-4 text-white sm:p-10">
       {loading && <Loader />}
 
-      <h1 className="font-epilogue rounded-[10px] bg-[#3a3a43] p-4 text-center text-lg leading-[38px] font-semibold sm:min-w-[380px] sm:text-[25px]">
+      <h1 className="font-epilogue bg-3a3a43 dark:bg-3a3a43-dark rounded-[10px] p-4 text-center text-lg leading-[38px] font-semibold sm:min-w-[380px] sm:text-[25px]">
         Start a Campaign
       </h1>
 
@@ -72,7 +72,7 @@ export default function CreateCampaignPage() {
         />
 
         {/*  */}
-        <div className="relative flex h-[120px] w-full items-center justify-start rounded-[10px] bg-[#8c6dfd] p-4">
+        <div className="relative flex h-[120px] w-full items-center justify-start rounded-[10px] text-white-dark bg-[#8c6dfd] p-4">
           <Image
             alt="money"
             width={40}
