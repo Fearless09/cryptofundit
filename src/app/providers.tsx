@@ -29,7 +29,6 @@ export function Providers(props: {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
           theme={resolvedTheme === "light" ? lightTheme() : midnightTheme()}
-          coolMode
         >
           <ContextProvider>
             <ProgressProvider
