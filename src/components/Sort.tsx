@@ -31,7 +31,7 @@ export default function Sort({ sort, onSort }: Props) {
 
   return (
     <div
-      className="absolute top-0 right-0 z-10 -translate-y-[12%]"
+      className="absolute top-0 right-0 z-[5] -translate-y-[12%]"
       ref={dropdownRef}
     >
       <button
@@ -51,7 +51,7 @@ export default function Sort({ sort, onSort }: Props) {
       </button>
 
       {toggle && (
-        <div className="bg-1c1c24 dark:bg-1c1c24-dark dark:text-white-dark border-3a3a43 dark:border-3a3a43-dark absolute right-0 z-10 mt-1 w-56 overflow-x-hidden overflow-y-auto rounded-md border shadow-lg">
+        <div className="bg-1c1c24 dark:bg-1c1c24-dark dark:text-white-dark border-3a3a43 dark:border-3a3a43-dark absolute right-0 z-[7] mt-1 w-56 overflow-x-hidden overflow-y-auto rounded-md border shadow-lg">
           <ul
             className="max-h-60 w-full"
             role="listbox"
