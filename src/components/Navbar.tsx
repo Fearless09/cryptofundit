@@ -67,7 +67,7 @@ export default function Navbar() {
           <NavIcon
             imgUrl="/assets/logo.svg"
             active
-            className="size-10 [&>img]:size-[65%]"
+            className="size-10 [&>img]:size-[80%]"
             name="Home"
           />
         </Link>

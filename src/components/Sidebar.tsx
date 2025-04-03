@@ -18,7 +18,7 @@ export default function Sidebar() {
       <Link href="/">
         <NavIcon
           imgUrl="/assets/logo.svg"
-          className="size-[52px]"
+          className="size-[52px] [&>img]:size-[80%]"
           active
           name="Home"
         />
