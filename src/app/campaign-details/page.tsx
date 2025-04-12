@@ -198,10 +198,10 @@ export default function CampaignDetailPage() {
                   onChange={handleDonationChange}
                   placeholder="ETH 0.1"
                   inputMode="decimal"
-                  className="font-epilogue border-3a3a43 dark:border-3a3a43-dark dark:text-white-dark placeholder:text-4b5264 dark:placeholder:text-4b5264-dark mt-[30px] w-full rounded-[10px] border bg-transparent px-3.5 py-2.5 text-lg/[30px] text-white outline-hidden sm:px-5"
+                  className="font-epilogue border-3a3a43 dark:border-3a3a43-dark dark:text-white-dark placeholder:text-4b5264 dark:placeholder:text-4b5264-dark mt-[30px] w-full rounded-[10px] border bg-transparent px-3.5 py-2.5 text-lg/[30px] text-white shadow outline-hidden sm:px-5"
                   required={isConnected}
                 />
-                <div className="bg-13131a dark:bg-13131a-dark mt-5 rounded-[10px] p-4">
+                <div className="bg-13131a dark:bg-13131a-dark mt-5 rounded-[10px] border border-black/5 p-4 shadow-sm dark:border-[#ffffff]/10">
                   <h4 className="font-epilogue text-base/[220x] font-semibold">
                     Back it because you believe in it.
                   </h4>
