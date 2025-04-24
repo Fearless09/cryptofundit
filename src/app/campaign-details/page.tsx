@@ -34,8 +34,10 @@ export default function CampaignDetailPage() {
   const userCampaigns = campaigns?.filter(
     (c) => c.owner === campaign_details?.owner,
   );
-  const remainingDays = (deadline: string) => {
-    return Number(daysLeft(deadline));
+  const remainingDays = (): "Expired" | string => {
+    if (!campaign_details) return "";
+    const deadline = campaign_details.deadline.toString();
+    return daysLeft(deadline);
   };
 
   useEffect(() => {
@@ -76,16 +78,7 @@ export default function CampaignDetailPage() {
 
             {/*  */}
             <div className="flex w-full flex-wrap justify-between gap-[30px] md:w-[150px]">
-              <CounterBox
-                title="Days Left"
-                value={
-                  remainingDays(campaign_details.deadline.toString()) < 0
-                    ? "Expired"
-                    : remainingDays(
-                        campaign_details.deadline.toString(),
-                      ).toString()
-                }
-              />
+              <CounterBox title="Days Left" value={remainingDays()} />
               <CounterBox
                 title={`Raised of ${campaign_details.targetAmount} ETH`}
                 value={campaign_details.raisedAmount.toString()}
@@ -132,19 +125,22 @@ export default function CampaignDetailPage() {
                 <h4 className="text-lg font-bold uppercase">Donators</h4>
                 <div className="mt-5">
                   {campaign_details.donators.length > 0 ? (
-                    campaign_details.donators.map((d, i) => (
+                    campaign_details.donators.map((donator, i) => (
                       <div
                         key={i}
                         className="flex items-center justify-between gap-4"
                       >
                         <p className="font-epilogue text-b2b3bd dark:text-b2b3bd-dark text-base/[26px] break-all">
-                          <span style={{ color: generateColorFromAddress(d) }}>
+                          <span
+                            style={{ color: generateColorFromAddress(donator) }}
+                            className="inline-block min-w-5"
+                          >
                             {i + 1}.
                           </span>{" "}
-                          {d}
+                          {donator}
                         </p>
                         <p className="font-epilogue text-808191 dark:text-808191-dark text-base/[26px] break-all">
-                          {campaign_details.donations[i]}
+                          {campaign_details.donations[i]} ETH
                         </p>
                       </div>
                     ))
@@ -162,61 +158,74 @@ export default function CampaignDetailPage() {
               <h4 className="font-epilogue text-lg font-semibold uppercase">
                 Fund
               </h4>
-              <form
-                className="bg-1c1c24 dark:bg-1c1c1c-dark mt-5 flex flex-col rounded-[10px] p-4"
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  if (!isConnected) {
-                    openConnectModal?.();
-                    return;
-                  }
-                  if (!donation) {
-                    toast.error("Please enter a donation amount.");
-                    return;
-                  }
-                  handleDonating(true);
-                  await donateAsync({
-                    id: campaign_details.cId,
-                    amount: donation,
-                  })
-                    .then(() => {
-                      refetchCampaigns();
-                    })
-                    .finally(() => {
-                      handleDonating(false);
-                    });
-                }}
-              >
+              <div className="bg-1c1c24 dark:bg-1c1c1c-dark mt-5 rounded-[10px] p-4">
                 <p className="font-epilogue text-808191 dark:text-808191-dark text-center text-xl/[30px] font-medium">
                   Fund the campaign
                 </p>
-                <input
-                  type="number"
-                  step={0.01}
-                  // defaultValue={donation}
-                  value={donation}
-                  onChange={handleDonationChange}
-                  placeholder="ETH 0.1"
-                  inputMode="decimal"
-                  className="font-epilogue border-3a3a43 dark:border-3a3a43-dark dark:text-white-dark placeholder:text-4b5264 dark:placeholder:text-4b5264-dark mt-[30px] w-full rounded-[10px] border bg-transparent px-3.5 py-2.5 text-lg/[30px] text-white shadow outline-hidden sm:px-5"
-                  required={isConnected}
-                />
-                <div className="bg-13131a dark:bg-13131a-dark mt-5 rounded-[10px] border border-black/5 p-4 shadow-sm dark:border-[#ffffff]/10">
-                  <h4 className="font-epilogue text-base/[220x] font-semibold">
-                    Back it because you believe in it.
-                  </h4>
-                  <p className="font-epilogue text-808191 dark:text-808191-dark mt-5 text-sm/[22px]">
-                    Support the project for no reward, just because it speaks to
-                    you.
+                {remainingDays() === "Expired" ? (
+                  <p className="font-epilogue bg-13131a dark:bg-13131a-dark text-808191 dark:text-808191-dark mt-5 flex h-[100px] items-center justify-center rounded-[10px] border border-black/5 p-4 text-center text-sm/[26px] shadow-sm dark:border-[#ffffff]/10">
+                    This campaign has expired.
+                    <br />
+                    You can't donate to expired campaign.
                   </p>
-                </div>
-                <Button
-                  type="submit"
-                  className="transition-300 mt-5 w-full bg-[#8c6dfd] hover:opacity-80"
-                >
-                  {isConnected ? "Fund Campaign" : "Connect Wallet"}
-                </Button>
-              </form>
+                ) : (
+                  <form
+                    className="flex flex-col"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      if (!isConnected) {
+                        openConnectModal?.();
+                        return;
+                      }
+                      if (!donation) {
+                        toast.error("Please enter a donation amount.");
+                        return;
+                      }
+                      handleDonating(true);
+                      await donateAsync({
+                        id: campaign_details.cId,
+                        amount: donation,
+                      })
+                        .then(async () => {
+                          await refetchCampaigns();
+                          handleDonationChange(0);
+                        })
+                        .finally(() => {
+                          handleDonating(false);
+                        });
+                    }}
+                  >
+                    <input
+                      type="number"
+                      step={0.0000000000000000000001}
+                      defaultValue={donation}
+                      // value={donation}
+                      onChange={(e) =>
+                        handleDonationChange(Number(e.target.value))
+                      }
+                      placeholder="ETH 0.1"
+                      inputMode="decimal"
+                      className="font-epilogue border-3a3a43 dark:border-3a3a43-dark dark:text-white-dark placeholder:text-4b5264 dark:placeholder:text-4b5264-dark mt-[30px] w-full rounded-[10px] border bg-transparent px-3.5 py-2.5 text-lg/[30px] text-white shadow outline-hidden sm:px-5"
+                      required={isConnected}
+                    />
+                    <div className="bg-13131a dark:bg-13131a-dark mt-5 rounded-[10px] border border-black/5 p-4 shadow-sm dark:border-[#ffffff]/10">
+                      <h4 className="font-epilogue text-base/[220x] font-semibold">
+                        Back it because you believe in it.
+                      </h4>
+                      <p className="font-epilogue text-808191 dark:text-808191-dark mt-5 text-sm/[22px]">
+                        Support the project for no reward, just because it
+                        speaks to you.
+                      </p>
+                    </div>
+                    <Button
+                      type="submit"
+                      className="transition-300 mt-5 w-full bg-[#8c6dfd] hover:opacity-80"
+                    >
+                      {isConnected ? "Fund Campaign" : "Connect Wallet"}
+                    </Button>
+                  </form>
+                )}
+              </div>
             </div>
           </div>
         </>

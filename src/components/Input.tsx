@@ -21,7 +21,7 @@ export const Input: FC<InputProps> = ({
     <Label label={label} required={required}>
       <input
         className={cn(genericClassName, className)}
-        step={step || 0.1}
+        step={step ?? 0.1}
         required={required}
         {...props}
       />

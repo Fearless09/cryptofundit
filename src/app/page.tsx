@@ -11,7 +11,6 @@ function App() {
   const {
     currentPage,
     handlePageChange,
-    itemPerPage,
     totalPages,
     endIndex,
     startIndex,

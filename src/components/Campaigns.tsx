@@ -8,7 +8,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Pagination } from "./Pagination";
 
 type Props = {
   campaigns: ParseCampaignType[];
@@ -61,11 +60,9 @@ type CampaignCardProps = {
 };
 
 const CampaignCard = ({ campaign }: CampaignCardProps) => {
-  const ramainingDays = Number(daysLeft(campaign.deadline.toString()));
-
   return (
     <Link
-      className="hover:shadow-secondary group transition-300 bg-1c1c24 dark:bg-1c1c24-dark w-full cursor-pointer rounded-[15px] hover:-translate-y1 hover:shadow-white/50 sm:w-[288px]"
+      className="hover:shadow-secondary group transition-300 bg-1c1c24 dark:bg-1c1c24-dark hover:-translate-y1 w-full cursor-pointer rounded-[15px] hover:shadow-white/50 sm:w-[288px]"
       href={`/campaign-details?title=${campaign.title}&id=${campaign.cId}`}
     >
       <div className="relative h-[160px] w-full overflow-hidden rounded-t-[15px]">
@@ -117,7 +114,7 @@ const CampaignCard = ({ campaign }: CampaignCardProps) => {
           {/*  */}
           <div className="flex flex-col">
             <h4 className="font-epilogue text-b2b3bd dark:text-b2b3bd-dark text-[14px]/[22px] font-semibold">
-              {ramainingDays < 0 ? "Expired" : ramainingDays}
+              {daysLeft(campaign.deadline.toString())}
             </h4>
             <p className="font-epilogue text-808191 dark:text-808191-dark mt-[3px] truncate text-[12px]/[18px] sm:max-w-[120px]">
               Days Left

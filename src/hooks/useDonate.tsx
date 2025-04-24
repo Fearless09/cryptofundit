@@ -15,8 +15,7 @@ export default function useDonate() {
   const { writeContractAsync, data } = useWriteContract();
   const [donation, setDonation] = useState<number>(0);
 
-  function handleDonationChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = Number(e.target.value);
+  function handleDonationChange(value: number) {
     setDonation(value);
   }
 

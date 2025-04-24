@@ -13,11 +13,11 @@ export function generateColorFromAddress(address: `0x${string}`) {
   return "#" + colorHex;
 }
 
-export const daysLeft = (deadline: string) => {
+export const daysLeft = (deadline: string): "Expired" | string => {
   const difference = new Date(deadline).getTime() - Date.now();
   const remainingDays = difference / (1000 * 3600 * 24);
 
-  return remainingDays.toFixed(0); // in days
+  return remainingDays < 1 ? "Expired" : remainingDays.toFixed(0); // in days
 };
 
 export const calculateBarPercentage = (goal: number, raisedAmount: number) => {
